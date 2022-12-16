@@ -1,6 +1,8 @@
 package com.springboot.jpa.data.repository;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.springboot.jpa.entity.Product;
+import com.springboot.jpa.entity.QProduct;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 public class ProductRepositoryTest {
@@ -60,4 +65,27 @@ public class ProductRepositoryTest {
                 Sort.Order.desc("stock")
         );
     }
+
+    /*JPAQuery를 활용한 QueryDSL 테스트 코드*/
+    @PersistenceContext
+    EntityManager entityManager;
+
+    @Test
+    void queryDslTest() {
+        JPAQuery<Product> query = new JPAQuery(entityManager);
+        QProduct qProduct = QProduct.product;
+
+        List<Product> productList = query
+                .from(qProduct) //쿼리
+                .where(qProduct.name.eq("펜")) //쿼리
+                .orderBy(qProduct.price.asc()) //쿼리
+                .fetch(); //조회 결과를 리스트로 반환
+
+        for(Product product : productList) {
+            System.out.println("----------------------");
+            System.out.println("Product Name :" + product);
+            System.out.println("----------------------");
+        }
+    }
+
 }

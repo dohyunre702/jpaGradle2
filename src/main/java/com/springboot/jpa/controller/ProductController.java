@@ -1,4 +1,4 @@
-package com.springboot.jpa.dao.controller;
+package com.springboot.jpa.controller;
 
 
 import com.springboot.jpa.data.dto.ChangeProductNameDto;
