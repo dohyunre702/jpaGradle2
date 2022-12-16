@@ -2,7 +2,7 @@ package com.springboot.jpa.dao.impl;
 
 import com.springboot.jpa.dao.ProductDAO;
 import com.springboot.jpa.entity.Product;
-import com.springboot.jpa.repository.ProductRepository;
+import com.springboot.jpa.data.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
