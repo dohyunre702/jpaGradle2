@@ -4,6 +4,8 @@ import com.springboot.jpa.entity.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
@@ -38,11 +40,18 @@ public class ProductRepositoryTest {
         product3.setUpdatedAt(LocalDateTime.now());
 
         Product savedProduct1 = productRepository.save(product1);
-        Product savedProdcut2 = productRepository.save(product2);
+        Product savedProduct2 = productRepository.save(product2);
         Product savedProduct3 = productRepository.save(product3);
 
         //쿼리 메서드에 Sort 객체 전달
         productRepository.findByName("펜", getSort());
+
+        //페이징 쿼리 메서드 호출
+       // Page<Product> productPage = productRepository.findByName("펜", PageRequest.of(0,2));
+
+        //Page 객체의 데이터 출력
+        Page<Product> productPage = productRepository.findByName("펜", PageRequest.of(0,2));
+        System.out.println(productPage.getContent());
     }
 
     private Sort getSort() {

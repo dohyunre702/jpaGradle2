@@ -1,12 +1,15 @@
 package com.springboot.jpa.data.repository;
 
 import com.springboot.jpa.entity.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    /* 정렬 */
     //Asc:오름차순, Desc:내림차순
     List<Product> findByNameOrderByNumberAsc(String name);
     List<Product> findByNameOrderByNumberDesc(String name);
@@ -16,4 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //매개변수 활용한 쿼리 정렬. Sort 객체 활용
     List<Product> findByName(String name, Sort sort);
+
+    /* 페이징 */
+    Page<Product> findByName(String name, Pageable pageable);
 }
