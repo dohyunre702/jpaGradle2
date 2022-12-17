@@ -2,6 +2,8 @@ package com.springboot.jpa.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +20,9 @@ public class Provider extends BaseEntity{
 
 
     private String name;
+
+    @OneToMany(mappedBy = "provider", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private List<Product> productList = new ArrayList<>();
+
 }
