@@ -2,7 +2,7 @@ package com.springboot.jpa.dao.impl;
 
 import com.springboot.jpa.dao.ProductDAO;
 import com.springboot.jpa.entity.Product;
-import com.springboot.jpa.data.repository.ProductRepository;
+import com.springboot.jpa.data.dto.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public Product selectProduct(Long number) {
-        Product selectedProduct = productRepository.getReferenceById(number);
+        Product selectedProduct = productRepository.getById(number);
         return selectedProduct;
     }
 

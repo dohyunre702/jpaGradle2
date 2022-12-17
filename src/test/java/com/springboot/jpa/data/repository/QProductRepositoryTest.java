@@ -1,6 +1,7 @@
 package com.springboot.jpa.data.repository;
 
 import com.querydsl.core.types.Predicate;
+import com.springboot.jpa.data.dto.repository.QProductRepository;
 import com.springboot.jpa.entity.Product;
 import com.springboot.jpa.entity.QProduct;
 import org.junit.jupiter.api.Test;

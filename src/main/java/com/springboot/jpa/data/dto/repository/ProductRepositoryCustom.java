@@ -1,4 +1,4 @@
-package com.springboot.jpa.data.repository;
+package com.springboot.jpa.data.dto.repository;
 
 import com.springboot.jpa.entity.Product;
 
