@@ -3,6 +3,8 @@ server:
     encoding:
       force-response: true
 spring:
+  main:
+    spring.main.allow-bean-definition-overriding: true
   jpa:
     hibernate:
       ddl-auto: create
@@ -15,4 +17,3 @@ spring:
     url: jdbc:mariadb://localhost:3307/springboot
     username: root
     password: 135246
-
