@@ -3,7 +3,6 @@ package com.springboot.jpa.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,5 +29,10 @@ public class Product extends BaseEntity{
     @OneToOne(mappedBy = "product")
     @ToString.Exclude
     private ProductDetail productDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    @ToString.Exclude
+    private Provider provider;
 
 }
