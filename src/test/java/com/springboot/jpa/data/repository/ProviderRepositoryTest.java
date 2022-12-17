@@ -91,4 +91,35 @@ public class ProviderRepositoryTest {
 
         return product;
     }
+
+    //고아객체 제거 기능 테스트
+    @Test
+    void orphanRemovalTest() {
+        Provider provider = savedProvider("새로운 공급업체");
+
+        Product product1 = savedProduct("상품1", 500, 1000);
+        Product product2 = savedProduct("상품2", 100, 2000);
+        Product product3 = savedProduct("상품3", 750, 5000);
+
+        //연관관계 매핑
+        product1.setProvider(provider);
+        product2.setProvider(provider);
+        product3.setProvider(provider);
+
+        provider.getProductList().addAll(Lists.newArrayList(product2, product2, product3));
+
+        providerRepository.saveAndFlush(provider);
+
+        //각 엔티티 출력
+        providerRepository.findAll().forEach(System.out::println);
+        productRepository.findAll().forEach(System.out::println);
+
+        //생성한 공급업체 엔티티 가져온 ㅎ후 첫 번째로 매핑된 상품 엔티티의 연관관계 제거
+        Provider foundProvider = providerRepository.findById(1L).get();
+        foundProvider.getProductList().remove(0);
+
+        //전체 코드 조회 수행0
+        providerRepository.findAll().forEach(System.out::println);
+        productRepository.findAll().forEach(System.out::println);
+    }
 }
